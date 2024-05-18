@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/802583175.svg)](https://zenodo.org/doi/10.5281/zenodo.11214826)
+
 # ABMExamples
 
 A collection of Agent-based models which I made mostly for educational purposes. 
