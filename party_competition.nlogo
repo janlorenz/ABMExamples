@@ -19,14 +19,14 @@ to setup
   ]
   voters-decide-support
   ask parties [ set old-voters count voters with [supports = myself] ]
+  parties-check-startegy
   visualize
-  create-votes-plots
   reset-ticks
 end
 
 to go
   voters-decide-support
-  parties-adapt
+  ask parties [adapt]
   visualize
   tick
 end
@@ -35,7 +35,7 @@ to voters-decide-support
   ask voters [ set supports min-one-of parties [distance myself] ]
 end
 
-to parties-adapt
+to parties-check-startegy
   ask parties [
     if who = 0 [set strategy party-1]
     if who = 1 [set strategy party-2]
@@ -51,12 +51,11 @@ to parties-adapt
     if who = 11 [set strategy party-12]
     if who = 12 [set strategy party-13]
     if who = 13 [set strategy party-14]
-    adapt
-    set old-voters count voters with [supports = myself]
   ]
 end
 
 to adapt
+  parties-check-startegy
   if strategy = "Aggregator" [
     setxy mean [xcor] of voters with [supports = myself]
           mean [ycor] of voters with [supports = myself]
@@ -68,6 +67,7 @@ to adapt
       right 90 + random 180
     ]
   ]
+  set old-voters count voters with [supports = myself]
 end
 
 ;; Visualization
@@ -83,22 +83,17 @@ to visualize
   update-votes-plots
 end
 
-
-to create-votes-plots
-  set-current-plot "votes time trend"
-  foreach n-values count parties [ i -> i ] [ j ->
-    create-temporary-plot-pen word "party" (j + 1)
-    set-plot-pen-color item j base-colors
-    plot %voters j
-  ]
-end
-
 to update-votes-plots
   set-current-plot "votes time trend"
   foreach n-values count parties [ i -> i ] [ j ->
-    set-current-plot-pen word "party" (j + 1)
-    plot %voters (j + 1)
-    if ticks > rolling-range [ set-plot-x-range (ticks - rolling-range) ticks ]
+    ifelse plot-pen-exists? word "party" (j + 1) [
+      set-current-plot-pen word "party" (j + 1)
+      plot %voters (j + 1)
+      if ticks > rolling-range [ set-plot-x-range (ticks - rolling-range) ticks ]
+    ][
+      create-temporary-plot-pen word "party" (j + 1)
+      set-plot-pen-color item j base-colors
+    ]
   ]
   set-current-plot "votes"
   clear-plot
@@ -109,6 +104,23 @@ to update-votes-plots
     set-plot-pen-color item j base-colors
     plotxy j %voters (j + 1)
   ]
+end
+
+to all-parties-equal [strategy-string]
+  set party-1 strategy-string
+  set party-2 strategy-string
+  set party-3 strategy-string
+  set party-4 strategy-string
+  set party-5 strategy-string
+  set party-6 strategy-string
+  set party-7 strategy-string
+  set party-8 strategy-string
+  set party-9 strategy-string
+  set party-10 strategy-string
+  set party-11 strategy-string
+  set party-12 strategy-string
+  set party-13 strategy-string
+  set party-14 strategy-string
 end
 
 ;; Reporters
@@ -198,7 +210,7 @@ CHOOSER
 party-1
 party-1
 "Aggregator" "Hunter" "Sticker"
-1
+0
 
 CHOOSER
 8
@@ -218,7 +230,7 @@ CHOOSER
 party-3
 party-3
 "Aggregator" "Hunter" "Predator" "Sticker"
-3
+0
 
 CHOOSER
 8
@@ -355,10 +367,10 @@ true
 PENS
 
 SLIDER
-8
-66
-181
-99
+7
+62
+180
+95
 N-voters
 N-voters
 0
@@ -378,7 +390,7 @@ N-parties
 N-parties
 1
 14
-3.0
+9.0
 1
 1
 NIL
@@ -402,7 +414,7 @@ CHOOSER
 party-7
 party-7
 "Aggregator" "Hunter" "Sticker"
-1
+0
 
 CHOOSER
 1131
@@ -412,7 +424,7 @@ CHOOSER
 party-8
 party-8
 "Aggregator" "Hunter" "Sticker"
-1
+0
 
 CHOOSER
 1131
@@ -422,7 +434,7 @@ CHOOSER
 party-9
 party-9
 "Aggregator" "Hunter" "Sticker"
-1
+0
 
 CHOOSER
 1131
@@ -432,7 +444,7 @@ CHOOSER
 party-10
 party-10
 "Aggregator" "Hunter" "Sticker"
-1
+0
 
 CHOOSER
 1131
@@ -519,6 +531,57 @@ TEXTBOX
 Even More Parties
 12
 0.0
+1
+
+BUTTON
+1130
+359
+1270
+393
+All "Hunter"
+all-parties-equal \"Hunter\"
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+1131
+397
+1271
+431
+All "Aggregator"
+all-parties-equal \"Aggregator\"
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+1131
+436
+1271
+470
+All "Sticker"
+all-parties-equal \"Sticker\"
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
 1
 
 @#$#@#$#@
