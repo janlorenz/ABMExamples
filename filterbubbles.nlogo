@@ -1,4 +1,3 @@
-extensions [nw]
 globals [communities]
 breed [guys guy]
 breed [infobits infobit]
@@ -11,15 +10,9 @@ infobits-own [popularity]
 
 to setup
   clear-all
-  if network-type = "groups" [
-    create-guys numguys [ initialize-guy ]
-    ask guys [ set group random numgroups ]
-    ask guys [ make-group-network ]
-  ]
-  if network-type = "watts-strogatz" [
-    nw:generate-watts-strogatz guys friends numguys numfriends / 2 fraction-inter [ initialize-guy ]
-    ask friends [set color yellow]
-  ]
+  create-guys numguys [ initialize-guy ]
+  ask guys [ set group random numgroups ]
+  ask guys [ make-group-network ]
   re-color-group
   visualize
   reset-ticks
@@ -128,32 +121,6 @@ to create-infosharer-network
   ]]]
 end
 
-to infosharer-community-color
-  create-infosharer-network
-  nw:set-context guys infosharers
-  set communities nw:louvain-communities
-  computed-community-color
-end
-
-to friend-community-color
-  nw:set-context guys friends
-  set communities nw:louvain-communities
-  computed-community-color
-end
-
-to infosharer-conectedcomponent-color
-  nw:set-context guys infosharers
-  set communities nw:weak-component-clusters
-  computed-community-color
-end
-
-to computed-community-color
-  let colors n-values (length communities) [ i -> 10 * i + 15 ]
-  (foreach communities colors [ [community col] ->
-    ask community [ set color col ]
-  ])
-end
-
 to re-color-group
   ask guys [set color group * 30 + 25]
 end
@@ -164,7 +131,6 @@ to baseline-settings
   set acceptance-sharpness 20
   set numguys 500
   set numfriends 20
-  set network-type "groups"
   set numgroups 4
   set fraction-inter 0.2
   set dims 2
@@ -232,10 +198,10 @@ NIL
 1
 
 BUTTON
-93
-217
-156
-250
+153
+216
+210
+249
 NIL
 go
 T
@@ -272,7 +238,7 @@ memory
 memory
 2
 40
-20.0
+10.0
 1
 1
 NIL
@@ -307,7 +273,7 @@ SWITCH
 148
 show-infolinks
 show-infolinks
-0
+1
 1
 -1000
 
@@ -345,7 +311,7 @@ acceptance-latitude
 acceptance-latitude
 0.02
 1
-0.32
+0.3
 0.02
 1
 NIL
@@ -437,7 +403,7 @@ SWITCH
 220
 show-friend-links
 show-friend-links
-0
+1
 1
 -1000
 
@@ -475,7 +441,7 @@ true
 true
 "" "set-plot-y-range 0 1"
 PENS
-"mean distance infosharers" 1.0 0 -10899396 true "" "create-infosharer-network\nplot mean [mean lput 0 [link-length] of my-infosharers] of guys / (max-pxcor + 0.5)"
+"mean distance infosharers" 1.0 0 -10899396 true "" "plot mean [mean lput 0 [link-length] of my-infosharers] of guys / (max-pxcor + 0.5)"
 "mean distance infobits" 1.0 0 -13345367 true "" "plot mean [mean lput 0 [link-length] of infolinks] of guys / (max-pxcor + 0.5)"
 "mean distance friends" 1.0 0 -5825686 true "" "plot mean [mean lput 0 [link-length] of friends] of guys  / (max-pxcor + 0.5)"
 
@@ -690,21 +656,11 @@ Att. dim. 2
 0.0
 1
 
-CHOOSER
-15
-127
-136
-172
-network-type
-network-type
-"groups" "watts-strogatz"
-0
-
 INPUTBOX
-183
-210
-251
-270
+212
+209
+280
+269
 stop-tick
 10000.0
 1
@@ -769,19 +725,19 @@ SLIDER
 plot-update-every
 plot-update-every
 1
-201
-201.0
-25
+200
+10.0
+1
 1
 NIL
 HORIZONTAL
 
 BUTTON
-120
-608
-184
-642
-NIL
+93
+216
+148
+250
+go 1
 go
 NIL
 1
