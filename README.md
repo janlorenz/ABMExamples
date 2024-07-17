@@ -7,7 +7,7 @@ I recommend using them with the local desktop app on your computer. For a quick 
 
 `filterbubbles` relates to   
 Geschke, D., Lorenz, J., & Holtz, P. (2019). The triple-filter bubble: Using agent-based modelling to test a meta-theoretical framework for the emergence of filter bubbles and echo chambers. British Journal of Social Psychology, 58, 129–149. https://doi.org/10.1111/bjso.12286  
-NetLogoWeb: *Does not work because it uses the `nw` extension not provided in NetLogoWeb, use the desktop app where it is provided by default.* 
+NetLogoWeb: http://netlogoweb.org/web?https://raw.githubusercontent.com/janlorenz/ABMExamples/main/filterbubbles.nlogo *(Highly recommended to be used in the desktop app for speed.)* 
 
 `matching_hypothesis` relates to   
 Kalick, S. M., & Hamilton, T. E. (1986). The matching hypothesis reexamined. Journal of Personality and Social Psychology, 51(4), 673–682. https://doi.org/10.1037/0022-3514.51.4.673  
