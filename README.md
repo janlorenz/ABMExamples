@@ -13,6 +13,10 @@ NetLogoWeb: *Does not work because it uses the `nw` extension not provided in Ne
 Kalick, S. M., & Hamilton, T. E. (1986). The matching hypothesis reexamined. Journal of Personality and Social Psychology, 51(4), 673–682. https://doi.org/10.1037/0022-3514.51.4.673  
 NetLogoWeb: http://netlogoweb.org/web?https://raw.githubusercontent.com/janlorenz/ABMExamples/main/matching_hypothesis.nlogo
 
+`preferentialattachement_minority_homophily` relates to     
+Karimi, F., Génois, M., Wagner, C., Singer, P., & Strohmaier, M. (2018). Homophily influences ranking of minorities in social networks. Scientific Reports, 8(1), 11077. https://doi.org/10.1038/s41598-018-29405-7  
+NetLogoWeb: *Does not work because it uses the `rnd` extension not provided in NetLogoWeb, use the desktop app where it is provided by default.* 
+
 `preferentialattachement_opinions` relates to   
 Gargiulo, F., & Gandica, Y. (2017). The Role of Homophily in the Emergence of Opinion Controversies. Journal of Artificial Societies and Social Simulation, 20(3), 8. https://doi.org/10.18564/jasss.3448  
 NetLogoWeb: *Does not work because it uses the `rnd` extension not provided in NetLogoWeb, use the desktop app where it is provided by default.* 

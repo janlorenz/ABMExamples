@@ -749,6 +749,16 @@ NIL
 NIL
 1
 
+TEXTBOX
+147
+599
+297
+689
+To Do:\n\nTry measure info sharer distance without network to improve speed?
+12
+0.0
+1
+
 @#$#@#$#@
 # Triple Filter Bubble Model
 
