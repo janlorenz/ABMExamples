@@ -19,9 +19,9 @@ to setup
 end
 
 to go
+  update-infobits
   new-infobits ; Step 1
   if posting [ ask guys [ post-infobit ] ] ; Step 2
-  update-infobits
   visualize
   if ticks mod plot-update-every = 0 [
     create-infosharer-network
@@ -138,6 +138,38 @@ to baseline-settings
   set plot-update-every 201
 end
 
+to few-agents
+  set memory 10
+  set acceptance-latitude 0.3
+  set acceptance-sharpness 20
+  set numguys 20
+  set numfriends 5
+  set numgroups 4
+  set fraction-inter 0.2
+  set dims 2
+  set posting false
+  set stop-tick 10000
+  baseline-visualization
+  set show-infolinks true
+  set show-friend-links true
+  setup
+end
+
+to many-agents
+  set memory 10
+  set acceptance-latitude 0.3
+  set acceptance-sharpness 20
+  set numguys 500
+  set numfriends 20
+  set numgroups 4
+  set fraction-inter 0.2
+  set dims 2
+  set posting false
+  set stop-tick 10000
+  baseline-visualization
+  setup
+end
+
 to baseline-visualization
   set show-people true
   set show-infobits true
@@ -154,10 +186,10 @@ to-report integration-probability [dist lambda k]
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-463
-42
-900
-480
+429
+36
+866
+474
 -1
 -1
 13.0
@@ -181,10 +213,10 @@ ticks
 30.0
 
 BUTTON
-15
-217
-88
-250
+17
+200
+90
+233
 NIL
 setup
 NIL
@@ -198,10 +230,10 @@ NIL
 1
 
 BUTTON
-153
-216
-210
-249
+155
+199
+212
+232
 NIL
 go
 T
@@ -215,10 +247,10 @@ NIL
 1
 
 SLIDER
-14
-53
-143
-86
+16
+36
+155
+69
 numguys
 numguys
 2
@@ -230,10 +262,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-10
-399
-253
-432
+12
+382
+255
+415
 memory
 memory
 2
@@ -245,10 +277,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-961
-42
-1219
-75
+919
+343
+1057
+376
 show-people
 show-people
 0
@@ -256,10 +288,10 @@ show-people
 -1000
 
 SWITCH
-961
-78
-1098
-111
+919
+379
+1056
+412
 show-infobits
 show-infobits
 0
@@ -267,31 +299,31 @@ show-infobits
 -1000
 
 SWITCH
-960
-115
-1218
-148
+1060
+343
+1203
+376
 show-infolinks
 show-infolinks
-1
+0
 1
 -1000
 
 CHOOSER
-959
-224
-1217
-269
+917
+489
+1047
+534
 patch-color
 patch-color
 "white" "frequency infobits" "frequency guys"
 0
 
 SLIDER
-11
-362
-253
-395
+13
+345
+255
+378
 acceptance-sharpness
 acceptance-sharpness
 0
@@ -303,10 +335,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-11
-325
-253
-358
+13
+308
+255
+341
 acceptance-latitude
 acceptance-latitude
 0.02
@@ -318,10 +350,10 @@ NIL
 HORIZONTAL
 
 PLOT
-282
-42
-442
-163
+263
+35
+423
+156
 guys' infolinks
 infos
 NIL
@@ -336,20 +368,20 @@ PENS
 "default" 1.0 1 -16777216 true "" "histogram [count my-infolinks] of guys"
 
 TEXTBOX
-14
-305
-182
-323
+16
+288
+184
+306
 Remember parameters
 12
 0.0
 1
 
 SWITCH
-12
-448
-251
-481
+14
+431
+253
+464
 posting
 posting
 0
@@ -357,14 +389,14 @@ posting
 -1000
 
 SLIDER
-983
-273
-1216
-306
+1049
+489
+1196
+522
 color-axis-max
 color-axis-max
 0.001
-0.05
+0.1
 0.05
 0.001
 1
@@ -372,20 +404,20 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-965
-12
-1189
-38
+922
+313
+1146
+339
 Visualization parameters
 18
 14.0
 1
 
 SLIDER
-15
-90
-143
-123
+16
+75
+155
+108
 numfriends
 numfriends
 1
@@ -397,10 +429,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-959
-187
-1218
-220
+917
+452
+1176
+485
 show-friend-links
 show-friend-links
 1
@@ -408,10 +440,10 @@ show-friend-links
 -1000
 
 PLOT
-283
-212
-443
-333
+265
+205
+425
+326
 guys' friends
 friends
 NIL
@@ -426,10 +458,10 @@ PENS
 "default" 1.0 1 -16777216 true "" "histogram [count my-friends] of guys"
 
 PLOT
-462
-546
-914
-810
+917
+39
+1317
+304
 spread measures guys
 NIL
 NIL
@@ -446,10 +478,10 @@ PENS
 "mean distance friends" 1.0 0 -5825686 true "" "plot mean [mean lput 0 [link-length] of friends] of guys  / (max-pxcor + 0.5)"
 
 PLOT
-283
-335
-443
-455
+265
+328
+425
+448
 infobits
 popularity
 NIL
@@ -464,10 +496,10 @@ PENS
 "default" 1.0 1 -16777216 true "" "histogram [popularity] of infobits"
 
 SWITCH
-960
-151
-1218
-184
+919
+416
+1177
+449
 show-infosharer-links
 show-infosharer-links
 1
@@ -475,10 +507,10 @@ show-infosharer-links
 -1000
 
 MONITOR
-365
-165
-437
-210
+346
+158
+418
+203
 # infolinks
 count infolinks
 17
@@ -486,10 +518,10 @@ count infolinks
 11
 
 MONITOR
-360
-457
-437
-502
+341
+451
+418
+496
 # infobits
 count infobits
 17
@@ -497,10 +529,10 @@ count infobits
 11
 
 SWITCH
-1100
-78
-1218
-111
+1060
+379
+1203
+412
 infobit-size
 infobit-size
 1
@@ -508,10 +540,10 @@ infobit-size
 -1000
 
 SLIDER
-139
-139
-252
-172
+31
+110
+155
+143
 numgroups
 numgroups
 1
@@ -523,10 +555,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-14
-178
-144
-211
+31
+146
+155
+179
 fraction-inter
 fraction-inter
 0
@@ -538,10 +570,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-162
-52
-254
-85
+164
+36
+256
+69
 dims
 dims
 1
@@ -553,10 +585,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-290
-165
-361
-210
+271
+158
+342
+203
 # friends
 count friends
 17
@@ -564,10 +596,10 @@ count friends
 11
 
 MONITOR
-730
-624
-891
-669
+1149
+126
+1310
+171
 mean-distance infosharer
 mean [mean lput 0 [link-length] of my-infosharers] of guys  / (max-pxcor + 0.5)
 3
@@ -575,10 +607,10 @@ mean [mean lput 0 [link-length] of my-infosharers] of guys  / (max-pxcor + 0.5)
 11
 
 MONITOR
-731
-673
-891
-718
+1151
+175
+1311
+220
 mean-distance infolinks
 mean [mean lput 0 [link-length] of my-infolinks] of guys / (max-pxcor + 0.5)
 3
@@ -586,10 +618,10 @@ mean [mean lput 0 [link-length] of my-infolinks] of guys / (max-pxcor + 0.5)
 11
 
 MONITOR
-731
-722
-892
-767
+1151
+224
+1312
+269
 mean-distance friends
 mean [mean lput 0 [link-length] of my-friends] of guys / (max-pxcor + 0.5)
 3
@@ -597,70 +629,70 @@ mean [mean lput 0 [link-length] of my-friends] of guys / (max-pxcor + 0.5)
 11
 
 TEXTBOX
-906
-41
-929
-59
+872
+35
+895
+53
 +1
 12
 0.0
 1
 
 TEXTBOX
-907
-458
-922
-476
+874
+452
+889
+470
 -1
 12
 0.0
 1
 
 TEXTBOX
-880
-483
-900
-501
+846
+477
+866
+495
 +1
 12
 0.0
 1
 
 TEXTBOX
-465
-483
-480
-501
+431
+477
+446
+495
 -1
 12
 0.0
 1
 
 TEXTBOX
-613
-483
-763
-501
+579
+477
+729
+495
 Attitude dimension 1
 12
 0.0
 1
 
 TEXTBOX
-903
-218
-932
-262
+874
+227
+913
+272
 Att. dim. 2
 12
 0.0
 1
 
 INPUTBOX
-212
-209
-280
-269
+159
+121
+227
+181
 stop-tick
 10000.0
 1
@@ -668,60 +700,60 @@ stop-tick
 Number
 
 TEXTBOX
-13
-19
-210
-44
+15
+8
+212
+33
 Setup parameters
 18
 14.0
 1
 
 TEXTBOX
-10
-276
-254
-301
+12
+259
+256
+284
 Dynamic parameters (go)
 18
 14.0
 1
 
 TEXTBOX
-578
-13
-805
-38
+544
+7
+771
+32
 Attitude space (World)
 18
 14.0
 1
 
 TEXTBOX
-316
-14
-408
-36
+298
+8
+390
+30
 Statistics
 18
 14.0
 1
 
 TEXTBOX
-514
-518
-678
-541
+947
+7
+1111
+30
 Output measures
 18
 14.0
 1
 
 SLIDER
-737
-514
-914
-547
+1140
+7
+1317
+40
 plot-update-every
 plot-update-every
 1
@@ -733,10 +765,10 @@ NIL
 HORIZONTAL
 
 BUTTON
-93
-216
-148
-250
+95
+199
+150
+233
 go 1
 go
 NIL
@@ -749,14 +781,38 @@ NIL
 NIL
 1
 
-TEXTBOX
-147
-599
-297
-689
-To Do:\n\nTry measure info sharer distance without network to improve speed?
-12
-0.0
+BUTTON
+433
+509
+537
+543
+NIL
+few-agents
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+537
+509
+654
+543
+NIL
+many-agents
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
 1
 
 @#$#@#$#@
