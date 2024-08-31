@@ -2,6 +2,7 @@ breed [voters voter]
 breed [parties party]
 voters-own [ supports ]
 parties-own [ strategy old-voters ] ; old-voters are needed for the Hunter strategy
+globals [party-order]
 
 
 to setup
@@ -33,6 +34,7 @@ end
 
 to voters-decide-support
   ask voters [ set supports min-one-of parties [distance myself] ]
+  set party-order 0
 end
 
 to parties-check-startegy
@@ -67,6 +69,12 @@ to adapt
       right 90 + random 180
     ]
   ]
+  if strategy = "Predator" [
+    if not (first-party-who = who + 1) [
+      set heading towards party (first-party-who - 1)
+      fd predator-stepsize
+    ]
+  ]
   set old-voters count voters with [supports = myself]
 end
 
@@ -78,6 +86,7 @@ to visualize
   ask parties [
     if strategy = "Aggregator" [set shape "x"]
     if strategy = "Hunter" [set shape "default"]
+    if strategy = "Predator" [set shape "arrow"]
     if strategy = "Sticker" [set shape "square"]
   ]
   update-votes-plots
@@ -128,9 +137,18 @@ end
 to-report #voters [party-id] ; 1-indexed
   report ifelse-value (party-id <= count parties) [count voters with [supports = party (party-id - 1)]] ["None"]
 end
+to-report #voters-list ; 1-indexed
+  report map [j -> #voters j] (n-values count parties [i -> i + 1])
+end
+to-report first-party-who ; 1-indexed
+  report 1 + position max #voters-list #voters-list
+end
 
 to-report %voters [party-id] ; 1-indexed
   report ifelse-value (party-id <= count parties) [100 * count voters with [supports = party (party-id - 1)] / count voters] ["None"]
+end
+to-report %voters-list
+  report map [j -> %voters j] (n-values count parties [i -> i + 1])
 end
 
 to-report random-normal-xcor-confined [m s]
@@ -144,8 +162,8 @@ end
 GRAPHICS-WINDOW
 225
 8
-746
-530
+902
+686
 -1
 -1
 20.3
@@ -209,8 +227,8 @@ CHOOSER
 221
 party-1
 party-1
-"Aggregator" "Hunter" "Sticker"
-0
+"Aggregator" "Hunter" "Predator" "Sticker"
+2
 
 CHOOSER
 8
@@ -219,7 +237,7 @@ CHOOSER
 266
 party-2
 party-2
-"Aggregator" "Hunter" "Sticker"
+"Aggregator" "Hunter" "Predator" "Sticker"
 0
 
 CHOOSER
@@ -249,14 +267,14 @@ CHOOSER
 402
 party-5
 party-5
-"Aggregator" "Hunter" "Sticker"
+"Aggregator" "Hunter" "Predator" "Sticker"
 0
 
 MONITOR
 147
 176
 218
-222
+221
 NIL
 %voters 1
 2
@@ -267,7 +285,7 @@ MONITOR
 147
 221
 218
-267
+266
 NIL
 %voters 2
 2
@@ -278,7 +296,7 @@ MONITOR
 147
 267
 218
-313
+312
 NIL
 %voters 3
 2
@@ -289,7 +307,7 @@ MONITOR
 147
 312
 218
-358
+357
 NIL
 %voters 4
 2
@@ -300,7 +318,7 @@ MONITOR
 147
 357
 218
-403
+402
 NIL
 %voters 5
 2
@@ -310,14 +328,14 @@ NIL
 SLIDER
 8
 495
-163
+216
 528
 hunter-stepsize
 hunter-stepsize
 0
-1
 0.1
-0.02
+0.01
+0.001
 1
 NIL
 HORIZONTAL
@@ -333,9 +351,9 @@ voter-positions
 1
 
 PLOT
-750
+917
 8
-1118
+1285
 268
 votes time trend
 NIL
@@ -350,9 +368,9 @@ true
 PENS
 
 PLOT
-751
+919
 307
-1118
+1286
 530
 votes
 NIL
@@ -385,12 +403,12 @@ SLIDER
 8
 100
 182
-131
+133
 N-parties
 N-parties
 1
 14
-9.0
+5.0
 1
 1
 NIL
@@ -400,97 +418,97 @@ CHOOSER
 8
 402
 147
-448
+447
 party-6
 party-6
-"Aggregator" "Hunter" "Sticker"
+"Aggregator" "Hunter" "Predator" "Sticker"
 0
 
 CHOOSER
 8
 447
 147
-493
+492
 party-7
 party-7
-"Aggregator" "Hunter" "Sticker"
+"Aggregator" "Hunter" "Predator" "Sticker"
 0
 
 CHOOSER
-1131
+1299
 33
-1270
-79
-party-8
-party-8
-"Aggregator" "Hunter" "Sticker"
-0
-
-CHOOSER
-1131
+1438
 78
-1270
-124
-party-9
-party-9
-"Aggregator" "Hunter" "Sticker"
+party-8
+party-8
+"Aggregator" "Hunter" "Predator" "Sticker"
 0
 
 CHOOSER
-1131
-124
-1270
-170
-party-10
-party-10
-"Aggregator" "Hunter" "Sticker"
+1299
+78
+1438
+123
+party-9
+party-9
+"Aggregator" "Hunter" "Predator" "Sticker"
 0
 
 CHOOSER
-1131
+1299
+124
+1438
 169
-1270
-215
-party-11
-party-11
-"Aggregator" "Hunter" "Sticker"
+party-10
+party-10
+"Aggregator" "Hunter" "Predator" "Sticker"
 0
 
 CHOOSER
-1131
+1299
+169
+1438
 214
-1270
-260
-party-12
-party-12
-"Aggregator" "Hunter" "Sticker"
+party-11
+party-11
+"Aggregator" "Hunter" "Predator" "Sticker"
 0
 
 CHOOSER
-1131
-260
-1270
-306
-party-13
-party-13
-"Aggregator" "Hunter" "Sticker"
+1299
+214
+1438
+259
+party-12
+party-12
+"Aggregator" "Hunter" "Predator" "Sticker"
 0
 
 CHOOSER
-1131
+1299
+260
+1438
 305
-1270
-351
+party-13
+party-13
+"Aggregator" "Hunter" "Predator" "Sticker"
+0
+
+CHOOSER
+1299
+305
+1438
+350
 party-14
 party-14
-"Aggregator" "Hunter" "Sticker"
+"Aggregator" "Hunter" "Predator" "Sticker"
 0
 
 MONITOR
 147
 402
 218
-448
+447
 NIL
 %voters 6
 2
@@ -501,7 +519,7 @@ MONITOR
 147
 447
 218
-493
+492
 NIL
 %voters 7
 2
@@ -509,10 +527,10 @@ NIL
 11
 
 SLIDER
-946
+1114
 268
-1119
-302
+1287
+301
 rolling-range
 rolling-range
 20
@@ -524,19 +542,19 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-1140
+1307
 8
-1256
-25
+1423
+26
 Even More Parties
 12
 0.0
 1
 
 BUTTON
-1130
+1297
 359
-1270
+1437
 393
 All "Hunter"
 all-parties-equal \"Hunter\"
@@ -551,9 +569,9 @@ NIL
 1
 
 BUTTON
-1131
+1299
 397
-1271
+1439
 431
 All "Aggregator"
 all-parties-equal \"Aggregator\"
@@ -568,12 +586,55 @@ NIL
 1
 
 BUTTON
-1131
+1299
 436
-1271
+1439
 470
 All "Sticker"
 all-parties-equal \"Sticker\"
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+MONITOR
+1112
+562
+1218
+607
+NIL
+first-party-who
+17
+1
+11
+
+SLIDER
+8
+531
+217
+564
+predator-stepsize
+predator-stepsize
+0
+0.1
+0.01
+0.001
+1
+NIL
+HORIZONTAL
+
+BUTTON
+1300
+475
+1440
+509
+All "Predator"
+all-parties-equal \"Predator\"
 NIL
 1
 T
