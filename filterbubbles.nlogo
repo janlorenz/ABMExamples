@@ -255,7 +255,7 @@ numguys
 numguys
 2
 1000
-500.0
+100.0
 1
 1
 NIL
