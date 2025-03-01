@@ -433,6 +433,16 @@ count persons with [protesting?] / count persons
 1
 11
 
+TEXTBOX
+212
+448
+624
+466
+The light-gray circle is only to showcase the perception radius. It has no role for the actual simulation!
+7
+0.0
+1
+
 @#$#@#$#@
 ## WHAT IS IT?
 
