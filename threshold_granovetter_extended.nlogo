@@ -57,7 +57,7 @@ to go
   ]
   visualize
   ; Stop procedure. We can only assess the stop when individuals do not move!
-  ifelse (not protestors-move?) and (not non-protestors-move?) and (count persons with [protesting?] = totalprotestors) [
+  ifelse (not protestors-move?) and (not non-protestors-move?) and (count persons with [protesting?] = totalprotestors) and (stop-automatic?)[
     set totalprotestors count persons with [protesting?]
     stop
   ] [
@@ -114,7 +114,7 @@ end
 GRAPHICS-WINDOW
 208
 7
-646
+645
 445
 -1
 -1
@@ -142,7 +142,7 @@ SLIDER
 9
 7
 201
-41
+40
 N
 N
 5
@@ -191,7 +191,7 @@ SLIDER
 8
 118
 202
-152
+151
 mu
 mu
 0
@@ -206,12 +206,12 @@ SLIDER
 8
 154
 202
-188
+187
 sigma
 sigma
 0
 100
-13.7
+12.2
 0.1
 1
 NIL
@@ -240,7 +240,7 @@ MONITOR
 654
 182
 748
-228
+227
 always protest
 count persons with [(mu + sigma * threshold) <= 0] / count persons
 3
@@ -251,7 +251,7 @@ MONITOR
 814
 183
 900
-229
+228
 never protest
 count persons with [(mu + sigma * threshold) >= 100] / count persons
 3
@@ -297,7 +297,7 @@ SWITCH
 8
 238
 202
-272
+271
 non-protestors-move?
 non-protestors-move?
 1
@@ -308,7 +308,7 @@ SWITCH
 8
 274
 202
-308
+307
 protestors-move?
 protestors-move?
 1
@@ -319,7 +319,7 @@ SLIDER
 8
 201
 202
-235
+234
 perception-radius
 perception-radius
 0
@@ -351,7 +351,7 @@ SWITCH
 7
 373
 204
-407
+406
 perception-visual-follows?
 perception-visual-follows?
 1
@@ -426,7 +426,7 @@ MONITOR
 866
 399
 975
-445
+444
 fraction protesting
 count persons with [protesting?] / count persons
 3
@@ -436,12 +436,23 @@ count persons with [protesting?] / count persons
 TEXTBOX
 212
 448
-624
-466
+625
+474
 The light-gray circle is only to showcase the perception radius. It has no role for the actual simulation!
-7
+9
 0.0
 1
+
+SWITCH
+237
+524
+402
+557
+stop-automatic?
+stop-automatic?
+1
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?

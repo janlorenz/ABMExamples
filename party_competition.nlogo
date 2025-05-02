@@ -2,8 +2,6 @@ breed [voters voter]
 breed [parties party]
 voters-own [ supports ]
 parties-own [ strategy old-voters ] ; old-voters are needed for the Hunter strategy
-globals [party-order]
-
 
 to setup
   clear-all
@@ -34,7 +32,6 @@ end
 
 to voters-decide-support
   ask voters [ set supports min-one-of parties [distance myself] ]
-  set party-order 0
 end
 
 to parties-check-startegy
@@ -88,7 +85,13 @@ to visualize
     if strategy = "Hunter" [set shape "default"]
     if strategy = "Predator" [set shape "arrow"]
     if strategy = "Sticker" [set shape "square"]
+    set label-color black
+    set label precision (%voters (who + 1)) 1
   ]
+;  foreach n-values count parties [i -> i] [j ->
+;    ask party j [
+;    ]
+;  ]
   update-votes-plots
 end
 
@@ -228,7 +231,7 @@ CHOOSER
 party-1
 party-1
 "Aggregator" "Hunter" "Predator" "Sticker"
-2
+0
 
 CHOOSER
 8

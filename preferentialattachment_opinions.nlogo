@@ -24,8 +24,9 @@ to new-node
   ; code
   create-turtles 1 [
     set opinion 1 - random-float 2
-    let followees rnd:weighted-n-of M other turtles [(count link-neighbors) * exp (- beta * abs (opinion - [opinion] of myself) )]
-    ; let followee one-of other turtles
+    let followees rnd:weighted-n-of M other turtles [
+      (ifelse-value (preferential_attachment) [(count link-neighbors)] [1]) * ; Preferential Attachment
+        exp (- beta * abs (opinion - [opinion] of myself) )] ; Homophily
     create-links-with followees
     move-to one-of followees
     forward 8
@@ -130,10 +131,10 @@ NIL
 1
 
 BUTTON
-106
-386
-170
-420
+104
+441
+168
+475
 NIL
 go
 T
@@ -165,10 +166,10 @@ PENS
 "default" 1.0 1 -16777216 true "" "set-plot-x-range 0 (1 + max [count link-neighbors] of turtles)\nhistogram [count link-neighbors] of turtles"
 
 BUTTON
-20
-385
-103
-419
+19
+441
+102
+475
 go once
 go
 NIL
@@ -184,13 +185,13 @@ NIL
 SLIDER
 20
 240
-193
+206
 273
 beta
 beta
 0
 100
-100.0
+22.0
 1
 1
 NIL
@@ -205,7 +206,7 @@ M
 M
 1
 5
-3.0
+5.0
 1
 1
 NIL
@@ -242,9 +243,9 @@ PENS
 
 BUTTON
 20
-276
+315
 140
-310
+349
 NIL
 build-network
 NIL
@@ -273,10 +274,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-19
-350
-206
-383
+18
+406
+205
+439
 bound-of-confidence
 bound-of-confidence
 0
@@ -318,14 +319,25 @@ Higher beta -> More opinion homophily
 1
 
 TEXTBOX
-23
-323
-182
-342
+22
+380
+181
+399
 Run opinion dynamics
 14
 0.0
 1
+
+SWITCH
+20
+275
+206
+308
+preferential_attachment
+preferential_attachment
+0
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?
