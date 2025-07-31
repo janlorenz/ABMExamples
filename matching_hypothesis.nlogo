@@ -62,18 +62,12 @@ to-report prob-acceptance [attractother attractself]
     [1])
 end
 
-
-;; list of link related variable by who of end 1
-; map [turt -> [heading] of turt] sort-on [who] turtles
-
 to-report correlation-partners
   let attractiveness-partner-lists [list ([attractiveness] of end1) ([attractiveness] of end2)] of links ; here male is always first because male is
   let male-list map [shortlist -> item 0 shortlist] attractiveness-partner-lists
   let female-list map [shortlist -> item 1 shortlist] attractiveness-partner-lists
   report correlation male-list female-list
 end
-
-
 
 to-report correlation [x y]
   ; this is a generic correlation function for two vectors (lists) of the same length
