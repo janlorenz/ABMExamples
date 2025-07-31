@@ -62,13 +62,23 @@ to-report prob-acceptance [attractother attractself]
     [1])
 end
 
-to-report correlation
-  ifelse (count couples = 0) [report 0] [
-    let meanfemales mean [attractiveness] of females
-    let meanmales mean [attractiveness] of males
-    let covariance mean [[attractiveness - meanfemales] of end1 * [attractiveness - meanmales] of end2] of couples
-    report covariance / ((standard-deviation [attractiveness] of females) * (standard-deviation [attractiveness] of males))
-  ]
+
+;; list of link related variable by who of end 1
+; map [turt -> [heading] of turt] sort-on [who] turtles
+
+to-report correlation-partners
+  let attractiveness-partner-lists [list ([attractiveness] of end1) ([attractiveness] of end2)] of links ; here male is always first because male is
+  let male-list map [shortlist -> item 0 shortlist] attractiveness-partner-lists
+  let female-list map [shortlist -> item 1 shortlist] attractiveness-partner-lists
+  report correlation male-list female-list
+end
+
+
+
+to-report correlation [x y]
+  ; this is a generic correlation function for two vectors (lists) of the same length
+  let covariance mean (map [[a b] -> (a - mean x) * (b - mean y)] x y)
+  report covariance / (standard-deviation x * standard-deviation y)
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -147,9 +157,9 @@ MONITOR
 132
 175
 230
-221
+220
 correlation
-correlation
+correlation-partners
 3
 1
 11
@@ -170,7 +180,7 @@ true
 false
 "" ""
 PENS
-"default" 1.0 0 -16777216 true "" "plot correlation"
+"default" 1.0 0 -16777216 true "" "plot correlation-partners"
 
 BUTTON
 76
@@ -241,7 +251,7 @@ CHOOSER
 79
 91
 229
-137
+136
 preference
 preference
 "None" "Attractive Partner" "Similar Partner"
