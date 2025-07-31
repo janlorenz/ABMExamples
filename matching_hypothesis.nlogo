@@ -63,10 +63,14 @@ to-report prob-acceptance [attractother attractself]
 end
 
 to-report correlation-partners
-  let attractiveness-partner-lists [list ([attractiveness] of end1) ([attractiveness] of end2)] of links ; here male is always first because male is
-  let male-list map [shortlist -> item 0 shortlist] attractiveness-partner-lists
-  let female-list map [shortlist -> item 1 shortlist] attractiveness-partner-lists
-  report correlation male-list female-list
+  ifelse count couples > 0 [
+    let attractiveness-partner-lists [list ([attractiveness] of end1) ([attractiveness] of end2)] of links ; here male is always first because male is
+    let male-list map [shortlist -> item 0 shortlist] attractiveness-partner-lists
+    let female-list map [shortlist -> item 1 shortlist] attractiveness-partner-lists
+    report correlation male-list female-list
+  ] [
+    report 0
+  ]
 end
 
 to-report correlation [x y]
@@ -209,7 +213,7 @@ true
 false
 "" ""
 PENS
-"default" 1.0 0 -16777216 true "" "plot mean [attractiveness] of turtles with [count couple-neighbors = 1]"
+"default" 1.0 0 -16777216 true "" "if count couples > 0 [plot mean [attractiveness] of turtles with [count couple-neighbors = 1]]"
 
 TEXTBOX
 248
