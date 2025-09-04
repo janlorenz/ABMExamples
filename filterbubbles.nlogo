@@ -145,7 +145,7 @@ to few-agents
   set acceptance-sharpness 20
   set numguys 20
   set numfriends 5
-  set numgroups 4
+  set numgroups 2
   set fraction-inter 0.2
   set dims 2
   set posting false
@@ -318,7 +318,7 @@ CHOOSER
 patch-color
 patch-color
 "white" "frequency infobits" "frequency infobits in memory" "frequency guys"
-2
+0
 
 SLIDER
 13
@@ -385,7 +385,7 @@ SWITCH
 464
 posting
 posting
-0
+1
 1
 -1000
 
@@ -398,7 +398,7 @@ color-axis-max
 color-axis-max
 0.001
 0.1
-0.028
+0.05
 0.001
 1
 NIL
@@ -474,9 +474,9 @@ true
 true
 "" "set-plot-y-range 0 1"
 PENS
-"mean distance infosharers" 1.0 0 -10899396 true "" "plot mean [mean lput 0 [link-length] of my-infosharers] of guys / (max-pxcor + 0.5)"
-"mean distance infobits" 1.0 0 -13345367 true "" "plot mean [mean lput 0 [link-length] of infolinks] of guys / (max-pxcor + 0.5)"
-"mean distance friends" 1.0 0 -5825686 true "" "plot mean [mean lput 0 [link-length] of friends] of guys  / (max-pxcor + 0.5)"
+"mean distance friends" 1.0 0 -1184463 true "" "plot mean [mean lput 0 [link-length] of friends] of guys  / (max-pxcor + 0.5)"
+"mean distance infosharers" 1.0 0 -16777216 true "" "plot mean [mean lput 0 [link-length] of my-infosharers] of guys / (max-pxcor + 0.5)"
+"mean distance infobits" 1.0 0 -7500403 true "" "plot mean [mean lput 0 [link-length] of infolinks] of guys / (max-pxcor + 0.5)"
 
 PLOT
 265
