@@ -109,6 +109,7 @@ to visualize
     ask patches [set pcolor white]
   ][
     if patch-color = "frequency infobits" and count infobits > 0 [ask patches [set pcolor scale-color gray (count infobits-here / count infobits) color-axis-max 0]]
+    if patch-color = "frequency infobits in memory" and count infobits > 0 [ask patches [set pcolor scale-color gray (sum [count link-neighbors] of infobits-here / count infolinks / 2) color-axis-max 0]]
     if patch-color = "frequency guys" [ask patches [set pcolor scale-color yellow (count guys-here / count guys) color-axis-max 0]]
   ]
 end
@@ -148,7 +149,7 @@ to few-agents
   set fraction-inter 0.2
   set dims 2
   set posting false
-  set stop-tick 10000
+  set stop-tick 1000
   baseline-visualization
   set show-infolinks true
   set show-friend-links true
@@ -159,13 +160,13 @@ to many-agents
   set memory 10
   set acceptance-latitude 0.3
   set acceptance-sharpness 20
-  set numguys 500
-  set numfriends 20
+  set numguys 400
+  set numfriends 10
   set numgroups 4
   set fraction-inter 0.2
   set dims 2
   set posting false
-  set stop-tick 10000
+  set stop-tick 1000
   baseline-visualization
   setup
 end
@@ -255,7 +256,7 @@ numguys
 numguys
 2
 1000
-100.0
+400.0
 1
 1
 NIL
@@ -305,19 +306,19 @@ SWITCH
 376
 show-infolinks
 show-infolinks
-0
+1
 1
 -1000
 
 CHOOSER
 917
-489
-1047
-534
+491
+1057
+536
 patch-color
 patch-color
-"white" "frequency infobits" "frequency guys"
-0
+"white" "frequency infobits" "frequency infobits in memory" "frequency guys"
+2
 
 SLIDER
 13
@@ -389,15 +390,15 @@ posting
 -1000
 
 SLIDER
-1049
-489
-1196
-522
+1060
+491
+1207
+524
 color-axis-max
 color-axis-max
 0.001
 0.1
-0.05
+0.028
 0.001
 1
 NIL
@@ -422,7 +423,7 @@ numfriends
 numfriends
 1
 40
-20.0
+10.0
 1
 1
 NIL
@@ -596,10 +597,10 @@ count friends
 11
 
 MONITOR
-1149
-126
-1310
-171
+1320
+211
+1480
+256
 mean-distance infosharer
 mean [mean lput 0 [link-length] of my-infosharers] of guys  / (max-pxcor + 0.5)
 3
@@ -607,10 +608,10 @@ mean [mean lput 0 [link-length] of my-infosharers] of guys  / (max-pxcor + 0.5)
 11
 
 MONITOR
-1151
-175
-1311
-220
+1320
+259
+1480
+304
 mean-distance infolinks
 mean [mean lput 0 [link-length] of my-infolinks] of guys / (max-pxcor + 0.5)
 3
@@ -618,10 +619,10 @@ mean [mean lput 0 [link-length] of my-infolinks] of guys / (max-pxcor + 0.5)
 11
 
 MONITOR
-1151
-224
-1312
-269
+1320
+163
+1480
+208
 mean-distance friends
 mean [mean lput 0 [link-length] of my-friends] of guys / (max-pxcor + 0.5)
 3
@@ -694,7 +695,7 @@ INPUTBOX
 227
 181
 stop-tick
-10000.0
+1000.0
 1
 0
 Number
