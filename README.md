@@ -14,7 +14,7 @@ Kalick, S. M., & Hamilton, T. E. (1986). The matching hypothesis reexamined. Jou
 NetLogoWeb: http://netlogoweb.org/web?https://raw.githubusercontent.com/janlorenz/ABMExamples/main/matching_hypothesis.nlogo
 
 `opiniondynamics_extremism` relates to
-Deffuant, G., Amblard, F., Weisbuch, G., & Faure, T. (2002). How can extremism prevail? A study based on the relative agreement interaction model. Journal of artificial societies and social simulation, 5(4). https://jasss.soc.surrey.ac.uk/5/4/1.html
+Deffuant, G., Amblard, F., Weisbuch, G., & Faure, T. (2002). How can extremism prevail? A study based on the relative agreement interaction model. Journal of artificial societies and social simulation, 5(4). https://jasss.soc.surrey.ac.uk/5/4/1.html   
 NetLogoWeb: http://netlogoweb.org/web?https://raw.githubusercontent.com/janlorenz/ABMExamples/main/opiniondynamics_extremism.nlogox 
 
 `party-competition` relates to   
