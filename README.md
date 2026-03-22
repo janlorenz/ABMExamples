@@ -13,6 +13,10 @@ NetLogoWeb: http://netlogoweb.org/web?https://raw.githubusercontent.com/janloren
 Kalick, S. M., & Hamilton, T. E. (1986). The matching hypothesis reexamined. Journal of Personality and Social Psychology, 51(4), 673–682. https://doi.org/10.1037/0022-3514.51.4.673  
 NetLogoWeb: http://netlogoweb.org/web?https://raw.githubusercontent.com/janlorenz/ABMExamples/main/matching_hypothesis.nlogo
 
+`opiniondynamics_extremism` relates to
+Deffuant, G., Amblard, F., Weisbuch, G., & Faure, T. (2002). How can extremism prevail? A study based on the relative agreement interaction model. Journal of artificial societies and social simulation, 5(4). https://jasss.soc.surrey.ac.uk/5/4/1.html
+NetLogoWeb: http://netlogoweb.org/web?https://raw.githubusercontent.com/janlorenz/ABMExamples/main/opiniondynamics_extremism.nlogox 
+
 `party-competition` relates to   
 Laver, M. (2005). Policy and the Dynamics of Political Competition. American Political Science Review, 99(02), 263–281. https://doi.org/10.1017/S0003055405051646  
 NetLogoWeb: http://netlogoweb.org/web?https://raw.githubusercontent.com/janlorenz/ABMExamples/main/party_competition.nlogo
