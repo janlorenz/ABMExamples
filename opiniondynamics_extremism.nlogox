@@ -111,9 +111,9 @@ end]]></code>
   <widgets>
     <view x="10" wrappingAllowedX="false" y="184" frameRate="30.0" minPycor="-30" height="293" showTickCounter="true" patchSize="6.17413" fontSize="10" wrappingAllowedY="false" width="958" tickCounterLabel="ticks" maxPycor="30" updateMode="1" maxPxcor="200" minPxcor="0"></view>
     <note x="10" y="10" backgroundDark="0" fontSize="18" width="230" markdown="false" height="25" textColorDark="-1" textColorLight="-5298144" backgroundLight="0">Main Model Parameters</note>
-    <slider x="10" step="10" y="40" max="5000" width="225" display="N" height="50" min="10" direction="Horizontal" default="1290.0" variable="N"></slider>
+    <slider x="10" step="10" y="40" max="5000" width="225" display="N" height="50" min="10" direction="Horizontal" default="200.0" variable="N"></slider>
     <slider x="10" step="0.01" y="95" max="0.25" width="225" display="fraction_extremists" height="50" min="0" direction="Horizontal" default="0.1" variable="fraction_extremists"></slider>
-    <slider x="240" step="0.01" y="40" max="1.8" width="225" display="uncertainty_moderates" height="50" min="0" direction="Horizontal" default="0.4" variable="uncertainty_moderates"></slider>
+    <slider x="240" step="0.01" y="40" max="1.8" width="225" display="uncertainty_moderates" height="50" min="0" direction="Horizontal" default="1.2" variable="uncertainty_moderates"></slider>
     <slider x="240" step="0.01" y="95" max="1" width="225" display="uncertainty_extremists" height="50" min="0" direction="Horizontal" default="0.1" variable="uncertainty_extremists"></slider>
     <button x="470" y="40" height="40" disableUntilTicks="false" forever="false" kind="Observer" width="65">setup</button>
     <button x="470" y="85" height="40" disableUntilTicks="false" forever="true" kind="Observer" width="65">go</button>
